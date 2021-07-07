@@ -1,0 +1,36 @@
+{
+  "name": "@ionapp/cli",
+  "version": "0.0.1",
+  "description": "Command Line Interface for Ion app",
+  "main": "./bin/ion",
+  "bin": {
+    "ion": "./bin/ion"
+  },
+  "directories": {
+    "bin": "bin"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionbot/cli.git"
+  },
+  "keywords": [
+    "ion",
+    "ion-bot",
+    "ion-cli"
+  ],
+  "author": "xencodes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ionbot/cli/issues"
+  },
+  "homepage": "https://github.com/ionbot/cli#readme",
+  "dependencies": {
+    "adm-zip": "^0.5.5",
+    "axios": "^0.21.1",
+    "commander": "^8.0.0",
+    "ora": "^5.4.1"
+  }
+}
