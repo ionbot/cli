@@ -2,10 +2,8 @@
 
 const { version } = require("../package.json");
 const { Command } = require("commander");
-const axios = require("axios"); // or 'https' for https:// URLs
-const fs = require("fs");
-const ora = require("ora");
-const AdmZip = require("adm-zip");
+
+const InitIon = require("../lib/init");
 
 const program = new Command();
 program.version(version);
@@ -14,26 +12,5 @@ program.option("--init", "Initialize a new Ion app").parse();
 
 let { init } = program.opts();
 if (init) {
-  const spinner = ora("Getting latest version").start();
-  axios
-    .get("https://api.github.com/repos/ionbot/ion-app/releases")
-    .then(({ data }) => {
-      const { zipball_url, tag_name } = data[0];
-      const fileName = `ion-${tag_name}.zip`;
-      spinner.text = `Downloading latest version: ${tag_name}`;
-      axios({
-        method: "get",
-        url: zipball_url,
-        responseType: "stream",
-      }).then((response) => {
-        const writer = fs.createWriteStream(fileName);
-        response.data.pipe(writer);
-        writer.on("close", () => {
-          spinner.text = "Downloaded success, extracting...";
-          const zip = new AdmZip(fileName);
-          zip.extractAllTo(".", true);
-          spinner.succeed("Extracted...");
-        });
-      });
-    });
+  InitIon();
 }
